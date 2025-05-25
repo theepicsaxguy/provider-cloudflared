@@ -24,7 +24,7 @@ import (
 	"github.com/pkg/errors"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1alpha1 "github.com/cdloh/provider-cloudflare/apis/warp/v1alpha1"
+	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/warp/v1alpha1"
 )
 
 // Setup adds a controller that reconciles DevicePostureIntegration managed resources.

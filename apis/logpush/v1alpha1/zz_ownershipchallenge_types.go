@@ -21,7 +21,7 @@ type OwnershipChallengeInitParameters struct {
 
 	// The account ID where the logpush ownership challenge should be created. Either account_id or zone_id are required.
 	// The account identifier to target for the resource. Must provide only one of `account_id`, `zone_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Reference to a Account in account to populate accountId.
@@ -38,7 +38,7 @@ type OwnershipChallengeInitParameters struct {
 
 	// The zone ID where the logpush ownership challenge should be created. Either account_id or zone_id are required.
 	// The zone identifier to target for the resource. Must provide only one of `account_id`, `zone_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in zone to populate zoneId.
@@ -75,7 +75,7 @@ type OwnershipChallengeParameters struct {
 
 	// The account ID where the logpush ownership challenge should be created. Either account_id or zone_id are required.
 	// The account identifier to target for the resource. Must provide only one of `account_id`, `zone_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
@@ -94,7 +94,7 @@ type OwnershipChallengeParameters struct {
 
 	// The zone ID where the logpush ownership challenge should be created. Either account_id or zone_id are required.
 	// The zone identifier to target for the resource. Must provide only one of `account_id`, `zone_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

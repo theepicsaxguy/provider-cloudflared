@@ -8,7 +8,7 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = "APIShield"
 		r.Kind = "APIShield"
 		r.References["zone_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone",
 		}
 	})
 }

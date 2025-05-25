@@ -8,9 +8,9 @@ Cloudflare API.
 ## Getting Started
 
 Install the provider by using the following command after changing the image tag
-to the [latest release](https://marketplace.upbound.io/providers/cdloh/provider-cloudflare):
+to the [latest release](https://marketplace.upbound.io/providers/theepicsaxguy/provider-cloudflare):
 ```
-up ctp provider install cdloh/provider-cloudflare:v0.1.0
+up ctp provider install theepicsaxguy/provider-cloudflare:v0.1.0
 ```
 
 Alternatively, you can use declarative installation:
@@ -21,13 +21,13 @@ kind: Provider
 metadata:
   name: provider-cloudflare
 spec:
-  package: cdloh/provider-cloudflare:v0.1.0
+  package: theepicsaxguy/provider-cloudflare:v0.1.0
 EOF
 ```
 
 Notice that in this example Provider resource is referencing ControllerConfig with debug enabled.
 
-You can see the API reference [here](https://doc.crds.dev/github.com/cdloh/provider-cloudflare).
+You can see the API reference [here](https://doc.crds.dev/github.com/theepicsaxguy/provider-cloudflare).
 
 ## Resource Refrence and Status
 
@@ -164,4 +164,4 @@ make build
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please
-open an [issue](https://github.com/cdloh/provider-cloudflare/issues).
+open an [issue](https://github.com/theepicsaxguy/provider-cloudflare/issues).

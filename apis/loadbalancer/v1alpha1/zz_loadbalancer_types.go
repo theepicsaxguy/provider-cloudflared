@@ -248,7 +248,7 @@ type LoadBalancerInitParameters struct {
 
 	// (String) The zone ID to add the load balancer to. Modifying this attribute will force creation of a new resource.
 	// The zone ID to add the load balancer to. **Modifying this attribute will force creation of a new resource.**
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in zone to populate zoneId.
@@ -464,7 +464,7 @@ type LoadBalancerParameters struct {
 
 	// (String) The zone ID to add the load balancer to. Modifying this attribute will force creation of a new resource.
 	// The zone ID to add the load balancer to. **Modifying this attribute will force creation of a new resource.**
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

@@ -1,8 +1,6 @@
-module github.com/cdloh/provider-cloudflare
+module github.com/theepicsaxguy/provider-cloudflare
 
 go 1.21
-
-toolchain go1.22.1
 
 require (
 	dario.cat/mergo v1.0.0
