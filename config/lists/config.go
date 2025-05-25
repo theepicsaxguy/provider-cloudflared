@@ -8,14 +8,14 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = "lists"
 		r.Kind = "IPList"
 		r.References["account_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account",
 		}
 	})
 	p.AddResourceConfigurator("cloudflare_list", func(r *config.Resource) {
 		r.ShortGroup = "lists"
 		r.Kind = "List"
 		r.References["account_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account",
 		}
 	})
 }

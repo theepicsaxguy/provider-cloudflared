@@ -12,21 +12,21 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroupName
 		r.Kind = "Argo"
 		r.References["zone_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone",
 		}
 	})
 	p.AddResourceConfigurator("cloudflare_argo_tunnel", func(r *config.Resource) {
 		r.ShortGroup = shortGroupName
 		r.Kind = "Tunnel"
 		r.References["account_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account",
 		}
 	})
 	p.AddResourceConfigurator("cloudflare_tunnel_config", func(r *config.Resource) {
 		r.ShortGroup = shortGroupName
 		r.Kind = "TunnelConfig"
 		r.References["account_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account",
 		}
 		r.References["tunnel_id"] = config.Reference{
 			Type: "Tunnel",
@@ -36,7 +36,7 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroupName
 		r.Kind = "TunnelRoute"
 		r.References["account_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account",
 		}
 		r.References["tunnel_id"] = config.Reference{
 			Type: "Tunnel",
@@ -49,7 +49,7 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = shortGroupName
 		r.Kind = "TunnelVirtualNetwork"
 		r.References["account_id"] = config.Reference{
-			Type: "github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account",
+			Type: "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account",
 		}
 	})
 }

@@ -21,7 +21,7 @@ type KVNamespaceInitParameters struct {
 
 	// (String) The account identifier to target for the resource.
 	// The account identifier to target for the resource.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Reference to a Account in account to populate accountId.
@@ -55,7 +55,7 @@ type KVNamespaceParameters struct {
 
 	// (String) The account identifier to target for the resource.
 	// The account identifier to target for the resource.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
