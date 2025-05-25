@@ -23,7 +23,7 @@ type PagesInitParameters struct {
 	// updated. Either account_id or zone_id must be provided. If
 	// account_id is present, it will override the zone setting.
 	// The account identifier to target for the resource. Conflicts with `zone_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Reference to a Account in account to populate accountId.
@@ -50,7 +50,7 @@ type PagesInitParameters struct {
 	// The zone ID where the custom pages should be
 	// updated. Either zone_id or account_id must be provided.
 	// The zone identifier to target for the resource. Conflicts with `account_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in zone to populate zoneId.
@@ -97,7 +97,7 @@ type PagesParameters struct {
 	// updated. Either account_id or zone_id must be provided. If
 	// account_id is present, it will override the zone setting.
 	// The account identifier to target for the resource. Conflicts with `zone_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
@@ -128,7 +128,7 @@ type PagesParameters struct {
 	// The zone ID where the custom pages should be
 	// updated. Either zone_id or account_id must be provided.
 	// The zone identifier to target for the resource. Conflicts with `account_id`.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

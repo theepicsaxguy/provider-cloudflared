@@ -29,7 +29,7 @@ type RuleInitParameters struct {
 
 	// (String) The identifier of the Filter to use for determining if the Firewall Rule should be triggered.
 	// The identifier of the Filter to use for determining if the Firewall Rule should be triggered.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/filters/v1alpha1.Filter
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/filters/v1alpha1.Filter
 	FilterID *string `json:"filterId,omitempty" tf:"filter_id,omitempty"`
 
 	// Reference to a Filter in filters to populate filterId.
@@ -55,7 +55,7 @@ type RuleInitParameters struct {
 
 	// (String) The zone identifier to target for the resource. Modifying this attribute will force creation of a new resource.
 	// The zone identifier to target for the resource. **Modifying this attribute will force creation of a new resource.**
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 
 	// Reference to a Zone in zone to populate zoneId.
@@ -116,7 +116,7 @@ type RuleParameters struct {
 
 	// (String) The identifier of the Filter to use for determining if the Firewall Rule should be triggered.
 	// The identifier of the Filter to use for determining if the Firewall Rule should be triggered.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/filters/v1alpha1.Filter
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/filters/v1alpha1.Filter
 	// +kubebuilder:validation:Optional
 	FilterID *string `json:"filterId,omitempty" tf:"filter_id,omitempty"`
 
@@ -146,7 +146,7 @@ type RuleParameters struct {
 
 	// (String) The zone identifier to target for the resource. Modifying this attribute will force creation of a new resource.
 	// The zone identifier to target for the resource. **Modifying this attribute will force creation of a new resource.**
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/zone/v1alpha1.Zone
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1.Zone
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 

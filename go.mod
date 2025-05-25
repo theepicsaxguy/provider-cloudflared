@@ -1,4 +1,4 @@
-module github.com/cdloh/provider-cloudflare
+module github.com/theepicsaxguy/provider-cloudflare
 
 go 1.23.0
 
