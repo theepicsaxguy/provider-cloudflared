@@ -2,7 +2,7 @@
 # Setup Project
 
 PROJECT_NAME := provider-cloudflare
-PROJECT_REPO := github.com/cdloh/$(PROJECT_NAME)
+PROJECT_REPO := github.com/theepicsaxguy/$(PROJECT_NAME)
 
 export TERRAFORM_VERSION := 1.5.5
 
@@ -71,7 +71,7 @@ IMAGES = $(PROJECT_NAME)
 # ====================================================================================
 # Setup XPKG
 
-XPKG_REG_ORGS ?= ghcr.io/cdloh
+XPKG_REG_ORGS ?= ghcr.io/theepicsaxguy
 # NOTE(hasheddan): skip promoting on xpkg.upbound.io as channel tags are
 # inferred.
 XPKG_REG_ORGS_NO_PROMOTE ?= xpkg.upbound.io/upbound

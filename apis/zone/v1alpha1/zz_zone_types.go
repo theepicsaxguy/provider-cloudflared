@@ -21,7 +21,7 @@ type ZoneInitParameters struct {
 
 	// (String) Account ID to manage the zone resource in.
 	// Account ID to manage the zone resource in.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Reference to a Account in account to populate accountId.
@@ -107,7 +107,7 @@ type ZoneParameters struct {
 
 	// (String) Account ID to manage the zone resource in.
 	// Account ID to manage the zone resource in.
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 

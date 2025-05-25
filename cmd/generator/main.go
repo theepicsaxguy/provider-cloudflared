@@ -11,7 +11,7 @@ import (
 
 	"github.com/crossplane/upjet/pkg/pipeline"
 
-	"github.com/cdloh/provider-cloudflare/config"
+	"github.com/theepicsaxguy/provider-cloudflare/config"
 )
 
 func main() {

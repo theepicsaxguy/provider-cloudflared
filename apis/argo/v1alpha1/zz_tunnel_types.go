@@ -21,7 +21,7 @@ type TunnelInitParameters struct {
 
 	// The Cloudflare account ID that you wish to manage the Argo Tunnel on.
 	// The account identifier to target for the resource. **Modifying this attribute will force creation of a new resource.**
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// Reference to a Account in account to populate accountId.
@@ -60,7 +60,7 @@ type TunnelParameters struct {
 
 	// The Cloudflare account ID that you wish to manage the Argo Tunnel on.
 	// The account identifier to target for the resource. **Modifying this attribute will force creation of a new resource.**
-	// +crossplane:generate:reference:type=github.com/cdloh/provider-cloudflare/apis/account/v1alpha1.Account
+	// +crossplane:generate:reference:type=github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1.Account
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 

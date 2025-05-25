@@ -26,12 +26,12 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/cache"
 	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
-	"github.com/cdloh/provider-cloudflare/apis"
-	"github.com/cdloh/provider-cloudflare/apis/v1alpha1"
-	"github.com/cdloh/provider-cloudflare/config"
-	"github.com/cdloh/provider-cloudflare/internal/clients"
-	"github.com/cdloh/provider-cloudflare/internal/controller"
-	"github.com/cdloh/provider-cloudflare/internal/features"
+	"github.com/theepicsaxguy/provider-cloudflare/apis"
+	"github.com/theepicsaxguy/provider-cloudflare/apis/v1alpha1"
+	"github.com/theepicsaxguy/provider-cloudflare/config"
+	"github.com/theepicsaxguy/provider-cloudflare/internal/clients"
+	"github.com/theepicsaxguy/provider-cloudflare/internal/controller"
+	"github.com/theepicsaxguy/provider-cloudflare/internal/features"
 )
 
 func main() {
