@@ -7,10 +7,11 @@ package v1alpha1
 
 import (
 	"context"
-	v1alpha11 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
-	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha11 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
+	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -22,7 +23,7 @@ func (mg *DevicePolicyCertificates) ResolveReferences(ctx context.Context, c cli
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.ZoneID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ZoneIDRef,
 		Selector:     mg.Spec.ForProvider.ZoneIDSelector,
@@ -34,11 +35,11 @@ func (mg *DevicePolicyCertificates) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneID")
 	}
-	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.ZoneID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.ZoneIDRef,
 		Selector:     mg.Spec.InitProvider.ZoneIDSelector,
@@ -50,7 +51,7 @@ func (mg *DevicePolicyCertificates) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ZoneID")
 	}
-	mg.Spec.InitProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ZoneIDRef = rsp.ResolvedReference
 
 	return nil
@@ -64,7 +65,7 @@ func (mg *DevicePostureIntegration) ResolveReferences(ctx context.Context, c cli
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -76,11 +77,11 @@ func (mg *DevicePostureIntegration) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -92,7 +93,7 @@ func (mg *DevicePostureIntegration) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -106,7 +107,7 @@ func (mg *DevicePostureRule) ResolveReferences(ctx context.Context, c client.Rea
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -118,11 +119,11 @@ func (mg *DevicePostureRule) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -134,7 +135,7 @@ func (mg *DevicePostureRule) ResolveReferences(ctx context.Context, c client.Rea
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -148,7 +149,7 @@ func (mg *DeviceSettingsPolicy) ResolveReferences(ctx context.Context, c client.
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -160,11 +161,11 @@ func (mg *DeviceSettingsPolicy) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -176,7 +177,7 @@ func (mg *DeviceSettingsPolicy) ResolveReferences(ctx context.Context, c client.
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -190,7 +191,7 @@ func (mg *FallbackDomain) ResolveReferences(ctx context.Context, c client.Reader
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -202,11 +203,11 @@ func (mg *FallbackDomain) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.PolicyID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.PolicyIDRef,
 		Selector:     mg.Spec.ForProvider.PolicyIDSelector,
@@ -218,11 +219,11 @@ func (mg *FallbackDomain) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyID")
 	}
-	mg.Spec.ForProvider.PolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -234,11 +235,11 @@ func (mg *FallbackDomain) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.PolicyID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.PolicyIDRef,
 		Selector:     mg.Spec.InitProvider.PolicyIDSelector,
@@ -250,7 +251,7 @@ func (mg *FallbackDomain) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyID")
 	}
-	mg.Spec.InitProvider.PolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyIDRef = rsp.ResolvedReference
 
 	return nil
@@ -264,7 +265,7 @@ func (mg *SplitTunnel) ResolveReferences(ctx context.Context, c client.Reader) e
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -276,11 +277,11 @@ func (mg *SplitTunnel) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PolicyID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.PolicyID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.PolicyIDRef,
 		Selector:     mg.Spec.ForProvider.PolicyIDSelector,
@@ -292,11 +293,11 @@ func (mg *SplitTunnel) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.PolicyID")
 	}
-	mg.Spec.ForProvider.PolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -308,11 +309,11 @@ func (mg *SplitTunnel) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.PolicyID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.PolicyIDRef,
 		Selector:     mg.Spec.InitProvider.PolicyIDSelector,
@@ -324,7 +325,7 @@ func (mg *SplitTunnel) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyID")
 	}
-	mg.Spec.InitProvider.PolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyIDRef = rsp.ResolvedReference
 
 	return nil

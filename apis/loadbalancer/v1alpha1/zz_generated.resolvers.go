@@ -7,10 +7,12 @@ package v1alpha1
 
 import (
 	"context"
+	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	convert "github.com/crossplane/crossplane-tools/pkg/convert"
+	errors "github.com/pkg/errors"
 	v1alpha11 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
 	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1"
-	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
-	errors "github.com/pkg/errors"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -24,7 +26,7 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.CountryPools); i3++ {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.CountryPools[i3].PoolIds),
+			CurrentValues: convert.FromPtrValues(mg.Spec.ForProvider.CountryPools[i3].PoolIds),
 			Extract:       reference.ExternalName(),
 			References:    mg.Spec.ForProvider.CountryPools[i3].PoolIdsRefs,
 			Selector:      mg.Spec.ForProvider.CountryPools[i3].PoolIdsSelector,
@@ -36,12 +38,12 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.CountryPools[i3].PoolIds")
 		}
-		mg.Spec.ForProvider.CountryPools[i3].PoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.CountryPools[i3].PoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.CountryPools[i3].PoolIdsRefs = mrsp.ResolvedReferences
 
 	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.DefaultPoolIds),
+		CurrentValues: convert.FromPtrValues(mg.Spec.ForProvider.DefaultPoolIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.ForProvider.DefaultPoolIdsRefs,
 		Selector:      mg.Spec.ForProvider.DefaultPoolIdsSelector,
@@ -53,11 +55,11 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DefaultPoolIds")
 	}
-	mg.Spec.ForProvider.DefaultPoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.DefaultPoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.DefaultPoolIdsRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FallbackPoolID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.FallbackPoolID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.FallbackPoolIDRef,
 		Selector:     mg.Spec.ForProvider.FallbackPoolIDSelector,
@@ -69,12 +71,12 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.FallbackPoolID")
 	}
-	mg.Spec.ForProvider.FallbackPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FallbackPoolID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FallbackPoolIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.PopPools); i3++ {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PopPools[i3].PoolIds),
+			CurrentValues: convert.FromPtrValues(mg.Spec.ForProvider.PopPools[i3].PoolIds),
 			Extract:       reference.ExternalName(),
 			References:    mg.Spec.ForProvider.PopPools[i3].PoolIdsRefs,
 			Selector:      mg.Spec.ForProvider.PopPools[i3].PoolIdsSelector,
@@ -86,13 +88,13 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.PopPools[i3].PoolIds")
 		}
-		mg.Spec.ForProvider.PopPools[i3].PoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.PopPools[i3].PoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.PopPools[i3].PoolIdsRefs = mrsp.ResolvedReferences
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.RegionPools); i3++ {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.RegionPools[i3].PoolIds),
+			CurrentValues: convert.FromPtrValues(mg.Spec.ForProvider.RegionPools[i3].PoolIds),
 			Extract:       reference.ExternalName(),
 			References:    mg.Spec.ForProvider.RegionPools[i3].PoolIdsRefs,
 			Selector:      mg.Spec.ForProvider.RegionPools[i3].PoolIdsSelector,
@@ -104,12 +106,12 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.RegionPools[i3].PoolIds")
 		}
-		mg.Spec.ForProvider.RegionPools[i3].PoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.RegionPools[i3].PoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.RegionPools[i3].PoolIdsRefs = mrsp.ResolvedReferences
 
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.ZoneID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ZoneIDRef,
 		Selector:     mg.Spec.ForProvider.ZoneIDSelector,
@@ -121,12 +123,12 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneID")
 	}
-	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.CountryPools); i3++ {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.CountryPools[i3].PoolIds),
+			CurrentValues: convert.FromPtrValues(mg.Spec.InitProvider.CountryPools[i3].PoolIds),
 			Extract:       reference.ExternalName(),
 			References:    mg.Spec.InitProvider.CountryPools[i3].PoolIdsRefs,
 			Selector:      mg.Spec.InitProvider.CountryPools[i3].PoolIdsSelector,
@@ -138,12 +140,12 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.CountryPools[i3].PoolIds")
 		}
-		mg.Spec.InitProvider.CountryPools[i3].PoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.CountryPools[i3].PoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.CountryPools[i3].PoolIdsRefs = mrsp.ResolvedReferences
 
 	}
 	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.DefaultPoolIds),
+		CurrentValues: convert.FromPtrValues(mg.Spec.InitProvider.DefaultPoolIds),
 		Extract:       reference.ExternalName(),
 		References:    mg.Spec.InitProvider.DefaultPoolIdsRefs,
 		Selector:      mg.Spec.InitProvider.DefaultPoolIdsSelector,
@@ -155,11 +157,11 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DefaultPoolIds")
 	}
-	mg.Spec.InitProvider.DefaultPoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.DefaultPoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.DefaultPoolIdsRefs = mrsp.ResolvedReferences
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FallbackPoolID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.FallbackPoolID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.FallbackPoolIDRef,
 		Selector:     mg.Spec.InitProvider.FallbackPoolIDSelector,
@@ -171,12 +173,12 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.FallbackPoolID")
 	}
-	mg.Spec.InitProvider.FallbackPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FallbackPoolID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FallbackPoolIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.PopPools); i3++ {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PopPools[i3].PoolIds),
+			CurrentValues: convert.FromPtrValues(mg.Spec.InitProvider.PopPools[i3].PoolIds),
 			Extract:       reference.ExternalName(),
 			References:    mg.Spec.InitProvider.PopPools[i3].PoolIdsRefs,
 			Selector:      mg.Spec.InitProvider.PopPools[i3].PoolIdsSelector,
@@ -188,13 +190,13 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.PopPools[i3].PoolIds")
 		}
-		mg.Spec.InitProvider.PopPools[i3].PoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.PopPools[i3].PoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.PopPools[i3].PoolIdsRefs = mrsp.ResolvedReferences
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.RegionPools); i3++ {
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.RegionPools[i3].PoolIds),
+			CurrentValues: convert.FromPtrValues(mg.Spec.InitProvider.RegionPools[i3].PoolIds),
 			Extract:       reference.ExternalName(),
 			References:    mg.Spec.InitProvider.RegionPools[i3].PoolIdsRefs,
 			Selector:      mg.Spec.InitProvider.RegionPools[i3].PoolIdsSelector,
@@ -206,12 +208,12 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.RegionPools[i3].PoolIds")
 		}
-		mg.Spec.InitProvider.RegionPools[i3].PoolIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.RegionPools[i3].PoolIds = convert.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.InitProvider.RegionPools[i3].PoolIdsRefs = mrsp.ResolvedReferences
 
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.ZoneID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.ZoneIDRef,
 		Selector:     mg.Spec.InitProvider.ZoneIDSelector,
@@ -223,7 +225,7 @@ func (mg *LoadBalancer) ResolveReferences(ctx context.Context, c client.Reader) 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ZoneID")
 	}
-	mg.Spec.InitProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ZoneIDRef = rsp.ResolvedReference
 
 	return nil
@@ -237,7 +239,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -249,11 +251,11 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -265,7 +267,7 @@ func (mg *Monitor) ResolveReferences(ctx context.Context, c client.Reader) error
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -279,7 +281,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -291,11 +293,11 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Monitor),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.Monitor, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.MonitorRef,
 		Selector:     mg.Spec.ForProvider.MonitorSelector,
@@ -307,11 +309,11 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.Monitor")
 	}
-	mg.Spec.ForProvider.Monitor = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.Monitor = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MonitorRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -323,11 +325,11 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Monitor),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.Monitor, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.MonitorRef,
 		Selector:     mg.Spec.InitProvider.MonitorSelector,
@@ -339,7 +341,7 @@ func (mg *Pool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.Monitor")
 	}
-	mg.Spec.InitProvider.Monitor = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.Monitor = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MonitorRef = rsp.ResolvedReference
 
 	return nil

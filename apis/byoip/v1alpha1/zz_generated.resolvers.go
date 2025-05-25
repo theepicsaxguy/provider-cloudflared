@@ -7,9 +7,10 @@ package v1alpha1
 
 import (
 	"context"
-	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -21,7 +22,7 @@ func (mg *IPPrefix) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -33,11 +34,11 @@ func (mg *IPPrefix) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -49,7 +50,7 @@ func (mg *IPPrefix) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil

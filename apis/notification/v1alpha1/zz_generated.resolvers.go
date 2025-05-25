@@ -7,9 +7,10 @@ package v1alpha1
 
 import (
 	"context"
-	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -21,7 +22,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -33,12 +34,12 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.WebhooksIntegration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebhooksIntegration[i3].ID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.WebhooksIntegration[i3].ID, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.WebhooksIntegration[i3].IDRef,
 			Selector:     mg.Spec.ForProvider.WebhooksIntegration[i3].IDSelector,
@@ -50,12 +51,12 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.WebhooksIntegration[i3].ID")
 		}
-		mg.Spec.ForProvider.WebhooksIntegration[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.WebhooksIntegration[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.WebhooksIntegration[i3].IDRef = rsp.ResolvedReference
 
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -67,12 +68,12 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.WebhooksIntegration); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebhooksIntegration[i3].ID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.WebhooksIntegration[i3].ID, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.WebhooksIntegration[i3].IDRef,
 			Selector:     mg.Spec.InitProvider.WebhooksIntegration[i3].IDSelector,
@@ -84,7 +85,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.WebhooksIntegration[i3].ID")
 		}
-		mg.Spec.InitProvider.WebhooksIntegration[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.WebhooksIntegration[i3].ID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.WebhooksIntegration[i3].IDRef = rsp.ResolvedReference
 
 	}
@@ -100,7 +101,7 @@ func (mg *PolicyWebhooks) ResolveReferences(ctx context.Context, c client.Reader
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -112,11 +113,11 @@ func (mg *PolicyWebhooks) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -128,7 +129,7 @@ func (mg *PolicyWebhooks) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil

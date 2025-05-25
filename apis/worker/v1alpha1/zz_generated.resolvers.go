@@ -7,10 +7,11 @@ package v1alpha1
 
 import (
 	"context"
-	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
-	v1alpha11 "github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1alpha1 "github.com/theepicsaxguy/provider-cloudflare/apis/account/v1alpha1"
+	v1alpha11 "github.com/theepicsaxguy/provider-cloudflare/apis/zone/v1alpha1"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -22,7 +23,7 @@ func (mg *CronTrigger) ResolveReferences(ctx context.Context, c client.Reader) e
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -34,11 +35,11 @@ func (mg *CronTrigger) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScriptName),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.ScriptName, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ScriptNameRef,
 		Selector:     mg.Spec.ForProvider.ScriptNameSelector,
@@ -50,11 +51,11 @@ func (mg *CronTrigger) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ScriptName")
 	}
-	mg.Spec.ForProvider.ScriptName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScriptName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScriptNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -66,11 +67,11 @@ func (mg *CronTrigger) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScriptName),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.ScriptName, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.ScriptNameRef,
 		Selector:     mg.Spec.InitProvider.ScriptNameSelector,
@@ -82,7 +83,7 @@ func (mg *CronTrigger) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ScriptName")
 	}
-	mg.Spec.InitProvider.ScriptName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScriptName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ScriptNameRef = rsp.ResolvedReference
 
 	return nil
@@ -96,7 +97,7 @@ func (mg *KV) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -108,11 +109,11 @@ func (mg *KV) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NamespaceID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.NamespaceID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.NamespaceIDRef,
 		Selector:     mg.Spec.ForProvider.NamespaceIDSelector,
@@ -124,11 +125,11 @@ func (mg *KV) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.NamespaceID")
 	}
-	mg.Spec.ForProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -140,11 +141,11 @@ func (mg *KV) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.NamespaceID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.NamespaceIDRef,
 		Selector:     mg.Spec.InitProvider.NamespaceIDSelector,
@@ -156,7 +157,7 @@ func (mg *KV) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceID")
 	}
-	mg.Spec.InitProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NamespaceIDRef = rsp.ResolvedReference
 
 	return nil
@@ -170,7 +171,7 @@ func (mg *KVNamespace) ResolveReferences(ctx context.Context, c client.Reader) e
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.AccountIDRef,
 		Selector:     mg.Spec.ForProvider.AccountIDSelector,
@@ -182,11 +183,11 @@ func (mg *KVNamespace) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AccountID")
 	}
-	mg.Spec.ForProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.AccountID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.AccountIDRef,
 		Selector:     mg.Spec.InitProvider.AccountIDSelector,
@@ -198,7 +199,7 @@ func (mg *KVNamespace) ResolveReferences(ctx context.Context, c client.Reader) e
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AccountID")
 	}
-	mg.Spec.InitProvider.AccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AccountIDRef = rsp.ResolvedReference
 
 	return nil
@@ -212,7 +213,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ScriptName),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.ScriptName, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ScriptNameRef,
 		Selector:     mg.Spec.ForProvider.ScriptNameSelector,
@@ -224,11 +225,11 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ScriptName")
 	}
-	mg.Spec.ForProvider.ScriptName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScriptName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScriptNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
+		CurrentValue: ptr.Deref(mg.Spec.ForProvider.ZoneID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ZoneIDRef,
 		Selector:     mg.Spec.ForProvider.ZoneIDSelector,
@@ -240,11 +241,11 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneID")
 	}
-	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ZoneIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScriptName),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.ScriptName, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.ScriptNameRef,
 		Selector:     mg.Spec.InitProvider.ScriptNameSelector,
@@ -256,11 +257,11 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ScriptName")
 	}
-	mg.Spec.InitProvider.ScriptName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScriptName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ScriptNameRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ZoneID),
+		CurrentValue: ptr.Deref(mg.Spec.InitProvider.ZoneID, ""),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.ZoneIDRef,
 		Selector:     mg.Spec.InitProvider.ZoneIDSelector,
@@ -272,7 +273,7 @@ func (mg *Route) ResolveReferences(ctx context.Context, c client.Reader) error {
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ZoneID")
 	}
-	mg.Spec.InitProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ZoneID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ZoneIDRef = rsp.ResolvedReference
 
 	return nil
@@ -287,7 +288,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.KvNamespaceBinding); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceID, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceIDRef,
 			Selector:     mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceIDSelector,
@@ -299,13 +300,13 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceID")
 		}
-		mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.KvNamespaceBinding[i3].NamespaceIDRef = rsp.ResolvedReference
 
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.KvNamespaceBinding); i3++ {
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceID, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceIDRef,
 			Selector:     mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceIDSelector,
@@ -317,7 +318,7 @@ func (mg *Script) ResolveReferences(ctx context.Context, c client.Reader) error 
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceID")
 		}
-		mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.KvNamespaceBinding[i3].NamespaceIDRef = rsp.ResolvedReference
 
 	}
