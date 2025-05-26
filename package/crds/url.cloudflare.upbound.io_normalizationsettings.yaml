@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.16.0
-  name: accountmembers.account.cloudflare.upbound.io
+  name: normalizationsettings.url.cloudflare.upbound.io
 spec:
-  group: account.cloudflare.upbound.io
+  group: url.cloudflare.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - cloudflare
-    kind: AccountMember
-    listKind: AccountMemberList
-    plural: accountmembers
-    singular: accountmember
+    kind: NormalizationSettings
+    listKind: NormalizationSettingsList
+    plural: normalizationsettings
+    singular: normalizationsettings
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: AccountMember is the Schema for the AccountMembers API. Provides
-          a resource which manages Cloudflare account members.
+        description: NormalizationSettings is the Schema for the NormalizationSettingss
+          API. Provides a resource to manage URL Normalization Settings.
         properties:
           apiVersion:
             description: |-
@@ -55,7 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: AccountMemberSpec defines the desired state of AccountMember
+            description: NormalizationSettingsSpec defines the desired state of NormalizationSettings
             properties:
               deletionPolicy:
                 default: Delete
@@ -73,102 +73,20 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  accountId:
+                  scope:
                     description: |-
-                      (String) Account ID to create the account member in.
-                      Account ID to create the account member in.
+                      (String) The scope of the URL normalization.
+                      The scope of the URL normalization.
                     type: string
-                  accountIdRef:
-                    description: Reference to a Account to populate accountId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  accountIdSelector:
-                    description: Selector for a Account to populate accountId.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  emailAddress:
+                  type:
                     description: |-
-                      (String) The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
-                      The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
+                      (String) The type of URL normalization performed by Cloudflare.
+                      The type of URL normalization performed by Cloudflare.
                     type: string
-                  roleIds:
+                  zoneId:
                     description: |-
-                      (Set of String) List of account role IDs that you want to assign to a member.
-                      List of account role IDs that you want to assign to a member.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
-                  status:
-                    description: |-
-                      (String) A member's status in the account. Available values: accepted, pending.
-                      A member's status in the account. Available values: `accepted`, `pending`.
+                      (String) The zone identifier to target for the resource. Modifying this attribute will force creation of a new resource.
+                      The zone identifier to target for the resource. **Modifying this attribute will force creation of a new resource.**
                     type: string
                 type: object
               initProvider:
@@ -184,102 +102,20 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  accountId:
+                  scope:
                     description: |-
-                      (String) Account ID to create the account member in.
-                      Account ID to create the account member in.
+                      (String) The scope of the URL normalization.
+                      The scope of the URL normalization.
                     type: string
-                  accountIdRef:
-                    description: Reference to a Account to populate accountId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  accountIdSelector:
-                    description: Selector for a Account to populate accountId.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  emailAddress:
+                  type:
                     description: |-
-                      (String) The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
-                      The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
+                      (String) The type of URL normalization performed by Cloudflare.
+                      The type of URL normalization performed by Cloudflare.
                     type: string
-                  roleIds:
+                  zoneId:
                     description: |-
-                      (Set of String) List of account role IDs that you want to assign to a member.
-                      List of account role IDs that you want to assign to a member.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
-                  status:
-                    description: |-
-                      (String) A member's status in the account. Available values: accepted, pending.
-                      A member's status in the account. Available values: `accepted`, `pending`.
+                      (String) The zone identifier to target for the resource. Modifying this attribute will force creation of a new resource.
+                      The zone identifier to target for the resource. **Modifying this attribute will force creation of a new resource.**
                     type: string
                 type: object
               managementPolicies:
@@ -450,44 +286,41 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.emailAddress is a required parameter
+            - message: spec.forProvider.scope is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddress)
-                || (has(self.initProvider) && has(self.initProvider.emailAddress))'
-            - message: spec.forProvider.roleIds is a required parameter
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
+                || (has(self.initProvider) && has(self.initProvider.scope))'
+            - message: spec.forProvider.type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.roleIds)
-                || (has(self.initProvider) && has(self.initProvider.roleIds))'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || (has(self.initProvider) && has(self.initProvider.type))'
+            - message: spec.forProvider.zoneId is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.zoneId)
+                || (has(self.initProvider) && has(self.initProvider.zoneId))'
           status:
-            description: AccountMemberStatus defines the observed state of AccountMember.
+            description: NormalizationSettingsStatus defines the observed state of
+              NormalizationSettings.
             properties:
               atProvider:
                 properties:
-                  accountId:
-                    description: |-
-                      (String) Account ID to create the account member in.
-                      Account ID to create the account member in.
-                    type: string
-                  emailAddress:
-                    description: |-
-                      (String) The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
-                      The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
-                    type: string
                   id:
                     description: (String) The ID of this resource.
                     type: string
-                  roleIds:
+                  scope:
                     description: |-
-                      (Set of String) List of account role IDs that you want to assign to a member.
-                      List of account role IDs that you want to assign to a member.
-                    items:
-                      type: string
-                    type: array
-                    x-kubernetes-list-type: set
-                  status:
+                      (String) The scope of the URL normalization.
+                      The scope of the URL normalization.
+                    type: string
+                  type:
                     description: |-
-                      (String) A member's status in the account. Available values: accepted, pending.
-                      A member's status in the account. Available values: `accepted`, `pending`.
+                      (String) The type of URL normalization performed by Cloudflare.
+                      The type of URL normalization performed by Cloudflare.
+                    type: string
+                  zoneId:
+                    description: |-
+                      (String) The zone identifier to target for the resource. Modifying this attribute will force creation of a new resource.
+                      The zone identifier to target for the resource. **Modifying this attribute will force creation of a new resource.**
                     type: string
                 type: object
               conditions:

@@ -17,22 +17,10 @@ func (tr *Healthcheck) Hub() {}
 func (tr *LogpullRetention) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ManagedHeaders) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *RateLimit) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *TieredCache) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TotalTLS) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *URLNormalizationSettings) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *UserAgentBlockingRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Zone) Hub() {}
@@ -41,4 +29,4 @@ func (tr *Zone) Hub() {}
 func (tr *DNSSEC) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SettingsOverride) Hub() {}
+func (tr *ZoneSettingsOverride) Hub() {}

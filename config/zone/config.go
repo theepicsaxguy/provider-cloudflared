@@ -97,4 +97,31 @@ func Configure(p *config.Provider) {
 		// Configure managed resource fields
 		r.UseAsync = true
 	})
+
+	p.AddResourceConfigurator("cloudflare_healthcheck", func(r *config.Resource) {
+		r.ShortGroup = shortGroupName
+		r.Kind = "Healthcheck"
+
+		// Configure external name
+		r.ExternalName = config.IdentifierFromProvider
+
+		// Reference to parent Zone
+		r.References["zone_id"] = config.Reference{
+			Type: "Zone",
+		}
+
+		// Enable async operations for long-running tasks
+		r.UseAsync = true
+
+		// Configure fields
+		if s, ok := r.TerraformResource.Schema["id"]; ok {
+			s.Required = false
+			s.Computed = true
+		}
+
+		// Ensure name is required
+		if s, ok := r.TerraformResource.Schema["name"]; ok {
+			s.Required = true
+		}
+	})
 }

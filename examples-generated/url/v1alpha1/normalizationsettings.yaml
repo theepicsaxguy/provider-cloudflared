@@ -1,0 +1,13 @@
+apiVersion: url.cloudflare.upbound.io/v1alpha1
+kind: NormalizationSettings
+metadata:
+  annotations:
+    meta.upbound.io/example-id: url/v1alpha1/normalizationsettings
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    scope: incoming
+    type: cloudflare
+    zoneId: 0da42c8d2132a9ddaf714f9e7c920711
