@@ -9,5 +9,4 @@ metadata:
 spec:
   forProvider:
     enforceTwofactor: true
-    name: some-enterprise-account
     type: enterprise

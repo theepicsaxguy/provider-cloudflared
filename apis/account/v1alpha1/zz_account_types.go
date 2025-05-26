@@ -23,10 +23,6 @@ type AccountInitParameters struct {
 	// Whether 2FA is enforced on the account. Defaults to `false`.
 	EnforceTwofactor *bool `json:"enforceTwofactor,omitempty" tf:"enforce_twofactor,omitempty"`
 
-	// (String) The name of the account that is displayed in the Cloudflare dashboard.
-	// The name of the account that is displayed in the Cloudflare dashboard.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// (String) Account type. Available values: enterprise, standard. Defaults to standard. Modifying this attribute will force creation of a new resource.
 	// Account type. Available values: `enterprise`, `standard`. Defaults to `standard`. **Modifying this attribute will force creation of a new resource.**
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -41,10 +37,6 @@ type AccountObservation struct {
 	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (String) The name of the account that is displayed in the Cloudflare dashboard.
-	// The name of the account that is displayed in the Cloudflare dashboard.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// (String) Account type. Available values: enterprise, standard. Defaults to standard. Modifying this attribute will force creation of a new resource.
 	// Account type. Available values: `enterprise`, `standard`. Defaults to `standard`. **Modifying this attribute will force creation of a new resource.**
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -56,11 +48,6 @@ type AccountParameters struct {
 	// Whether 2FA is enforced on the account. Defaults to `false`.
 	// +kubebuilder:validation:Optional
 	EnforceTwofactor *bool `json:"enforceTwofactor,omitempty" tf:"enforce_twofactor,omitempty"`
-
-	// (String) The name of the account that is displayed in the Cloudflare dashboard.
-	// The name of the account that is displayed in the Cloudflare dashboard.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) Account type. Available values: enterprise, standard. Defaults to standard. Modifying this attribute will force creation of a new resource.
 	// Account type. Available values: `enterprise`, `standard`. Defaults to `standard`. **Modifying this attribute will force creation of a new resource.**
@@ -104,9 +91,8 @@ type AccountStatus struct {
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	Spec   AccountSpec   `json:"spec"`
-	Status AccountStatus `json:"status,omitempty"`
+	Spec              AccountSpec   `json:"spec"`
+	Status            AccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

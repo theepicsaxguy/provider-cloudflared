@@ -27,10 +27,6 @@ type APITokenInitParameters struct {
 	// The expiration time on or after which the token MUST NOT be accepted for processing.
 	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
 
-	// (String) Name of the API Token.
-	// Name of the API Token.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// (String) The time before which the token MUST NOT be accepted for processing.
 	// The time before which the token MUST NOT be accepted for processing.
 	NotBefore *string `json:"notBefore,omitempty" tf:"not_before,omitempty"`
@@ -61,10 +57,6 @@ type APITokenObservation struct {
 	// Timestamp of when the token was last modified.
 	ModifiedOn *string `json:"modifiedOn,omitempty" tf:"modified_on,omitempty"`
 
-	// (String) Name of the API Token.
-	// Name of the API Token.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// (String) The time before which the token MUST NOT be accepted for processing.
 	// The time before which the token MUST NOT be accepted for processing.
 	NotBefore *string `json:"notBefore,omitempty" tf:"not_before,omitempty"`
@@ -88,11 +80,6 @@ type APITokenParameters struct {
 	// The expiration time on or after which the token MUST NOT be accepted for processing.
 	// +kubebuilder:validation:Optional
 	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
-
-	// (String) Name of the API Token.
-	// Name of the API Token.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) The time before which the token MUST NOT be accepted for processing.
 	// The time before which the token MUST NOT be accepted for processing.
@@ -258,7 +245,6 @@ type APITokenStatus struct {
 type APIToken struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy) || (has(self.initProvider) && has(self.initProvider.policy))",message="spec.forProvider.policy is a required parameter"
 	Spec   APITokenSpec   `json:"spec"`
 	Status APITokenStatus `json:"status,omitempty"`

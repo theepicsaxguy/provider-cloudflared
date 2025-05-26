@@ -29,7 +29,6 @@ metadata:
   name: logpush-r2-token
 spec:
   forProvider:
-    name: logpush_r2_token
     policy:
     - permissionGroups:
       - ${data.cloudflare_api_token_permission_groups.all.permissions["Workers R2

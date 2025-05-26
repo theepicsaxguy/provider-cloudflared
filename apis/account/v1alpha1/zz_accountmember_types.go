@@ -17,20 +17,11 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type MemberInitParameters struct {
+type AccountMemberInitParameters struct {
 
 	// (String) Account ID to create the account member in.
 	// Account ID to create the account member in.
-	// +crossplane:generate:reference:type=Account
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
-
-	// Reference to a Account to populate accountId.
-	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
-
-	// Selector for a Account to populate accountId.
-	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// (String) The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
 	// The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
@@ -46,7 +37,7 @@ type MemberInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
-type MemberObservation struct {
+type AccountMemberObservation struct {
 
 	// (String) Account ID to create the account member in.
 	// Account ID to create the account member in.
@@ -69,21 +60,12 @@ type MemberObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
-type MemberParameters struct {
+type AccountMemberParameters struct {
 
 	// (String) Account ID to create the account member in.
 	// Account ID to create the account member in.
-	// +crossplane:generate:reference:type=Account
 	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
-
-	// Reference to a Account to populate accountId.
-	// +kubebuilder:validation:Optional
-	AccountIDRef *v1.Reference `json:"accountIdRef,omitempty" tf:"-"`
-
-	// Selector for a Account to populate accountId.
-	// +kubebuilder:validation:Optional
-	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// (String) The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
 	// The email address of the user who you wish to manage. Following creation, this field becomes read only via the API and cannot be updated.
@@ -102,10 +84,10 @@ type MemberParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
-// MemberSpec defines the desired state of Member
-type MemberSpec struct {
+// AccountMemberSpec defines the desired state of AccountMember
+type AccountMemberSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     MemberParameters `json:"forProvider"`
+	ForProvider     AccountMemberParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -116,51 +98,51 @@ type MemberSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider MemberInitParameters `json:"initProvider,omitempty"`
+	InitProvider AccountMemberInitParameters `json:"initProvider,omitempty"`
 }
 
-// MemberStatus defines the observed state of Member.
-type MemberStatus struct {
+// AccountMemberStatus defines the observed state of AccountMember.
+type AccountMemberStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        MemberObservation `json:"atProvider,omitempty"`
+	AtProvider        AccountMemberObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Member is the Schema for the Members API. Provides a resource which manages Cloudflare account members.
+// AccountMember is the Schema for the AccountMembers API. Provides a resource which manages Cloudflare account members.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,cloudflare}
-type Member struct {
+type AccountMember struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.emailAddress) || (has(self.initProvider) && has(self.initProvider.emailAddress))",message="spec.forProvider.emailAddress is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roleIds) || (has(self.initProvider) && has(self.initProvider.roleIds))",message="spec.forProvider.roleIds is a required parameter"
-	Spec   MemberSpec   `json:"spec"`
-	Status MemberStatus `json:"status,omitempty"`
+	Spec   AccountMemberSpec   `json:"spec"`
+	Status AccountMemberStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// MemberList contains a list of Members
-type MemberList struct {
+// AccountMemberList contains a list of AccountMembers
+type AccountMemberList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Member `json:"items"`
+	Items           []AccountMember `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	Member_Kind             = "Member"
-	Member_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Member_Kind}.String()
-	Member_KindAPIVersion   = Member_Kind + "." + CRDGroupVersion.String()
-	Member_GroupVersionKind = CRDGroupVersion.WithKind(Member_Kind)
+	AccountMember_Kind             = "AccountMember"
+	AccountMember_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: AccountMember_Kind}.String()
+	AccountMember_KindAPIVersion   = AccountMember_Kind + "." + CRDGroupVersion.String()
+	AccountMember_GroupVersionKind = CRDGroupVersion.WithKind(AccountMember_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&Member{}, &MemberList{})
+	SchemeBuilder.Register(&AccountMember{}, &AccountMemberList{})
 }

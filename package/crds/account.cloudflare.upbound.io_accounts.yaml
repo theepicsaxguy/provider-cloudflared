@@ -79,11 +79,6 @@ spec:
                       (Boolean) Whether 2FA is enforced on the account. Defaults to false.
                       Whether 2FA is enforced on the account. Defaults to `false`.
                     type: boolean
-                  name:
-                    description: |-
-                      (String) The name of the account that is displayed in the Cloudflare dashboard.
-                      The name of the account that is displayed in the Cloudflare dashboard.
-                    type: string
                   type:
                     description: |-
                       (String) Account type. Available values: enterprise, standard. Defaults to standard. Modifying this attribute will force creation of a new resource.
@@ -108,11 +103,6 @@ spec:
                       (Boolean) Whether 2FA is enforced on the account. Defaults to false.
                       Whether 2FA is enforced on the account. Defaults to `false`.
                     type: boolean
-                  name:
-                    description: |-
-                      (String) The name of the account that is displayed in the Cloudflare dashboard.
-                      The name of the account that is displayed in the Cloudflare dashboard.
-                    type: string
                   type:
                     description: |-
                       (String) Account type. Available values: enterprise, standard. Defaults to standard. Modifying this attribute will force creation of a new resource.
@@ -286,11 +276,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: AccountStatus defines the observed state of Account.
             properties:
@@ -303,11 +288,6 @@ spec:
                     type: boolean
                   id:
                     description: (String) The ID of this resource.
-                    type: string
-                  name:
-                    description: |-
-                      (String) The name of the account that is displayed in the Cloudflare dashboard.
-                      The name of the account that is displayed in the Cloudflare dashboard.
                     type: string
                   type:
                     description: |-

@@ -14,7 +14,6 @@ spec:
         - 192.0.2.1/32
         notIn:
         - 198.51.100.1/32
-    name: api_token_create
     policy:
     - expires_on: "2020-01-01T00:00:00Z"
       not_before: "2018-07-01T05:20:00Z"

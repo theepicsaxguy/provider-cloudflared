@@ -14,7 +14,7 @@ package v1alpha1
 func (tr *Account) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Member) Hub() {}
+func (tr *AccountMember) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *APIToken) Hub() {}

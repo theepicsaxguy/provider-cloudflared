@@ -111,11 +111,6 @@ spec:
                       (String) The expiration time on or after which the token MUST NOT be accepted for processing.
                       The expiration time on or after which the token MUST NOT be accepted for processing.
                     type: string
-                  name:
-                    description: |-
-                      (String) Name of the API Token.
-                      Name of the API Token.
-                    type: string
                   notBefore:
                     description: |-
                       (String) The time before which the token MUST NOT be accepted for processing.
@@ -200,11 +195,6 @@ spec:
                     description: |-
                       (String) The expiration time on or after which the token MUST NOT be accepted for processing.
                       The expiration time on or after which the token MUST NOT be accepted for processing.
-                    type: string
-                  name:
-                    description: |-
-                      (String) Name of the API Token.
-                      Name of the API Token.
                     type: string
                   notBefore:
                     description: |-
@@ -409,10 +399,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.policy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.policy)
@@ -471,11 +457,6 @@ spec:
                     description: |-
                       (String) Timestamp of when the token was last modified.
                       Timestamp of when the token was last modified.
-                    type: string
-                  name:
-                    description: |-
-                      (String) Name of the API Token.
-                      Name of the API Token.
                     type: string
                   notBefore:
                     description: |-

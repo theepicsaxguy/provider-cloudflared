@@ -21,8 +21,8 @@ import (
 	rule "github.com/theepicsaxguy/provider-cloudflare/internal/controller/access/rule"
 	servicetoken "github.com/theepicsaxguy/provider-cloudflare/internal/controller/access/servicetoken"
 	account "github.com/theepicsaxguy/provider-cloudflare/internal/controller/account/account"
+	accountmember "github.com/theepicsaxguy/provider-cloudflare/internal/controller/account/accountmember"
 	apitoken "github.com/theepicsaxguy/provider-cloudflare/internal/controller/account/apitoken"
-	member "github.com/theepicsaxguy/provider-cloudflare/internal/controller/account/member"
 	apishield "github.com/theepicsaxguy/provider-cloudflare/internal/controller/apishield/apishield"
 	argo "github.com/theepicsaxguy/provider-cloudflare/internal/controller/argo/argo"
 	tunnel "github.com/theepicsaxguy/provider-cloudflare/internal/controller/argo/tunnel"
@@ -118,8 +118,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		rule.Setup,
 		servicetoken.Setup,
 		account.Setup,
+		accountmember.Setup,
 		apitoken.Setup,
-		member.Setup,
 		apishield.Setup,
 		argo.Setup,
 		tunnel.Setup,
