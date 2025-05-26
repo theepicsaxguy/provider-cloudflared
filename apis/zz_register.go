@@ -32,17 +32,13 @@ import (
 	v1alpha1loadbalancer "github.com/theepicsaxguy/provider-cloudflare/apis/loadbalancer/v1alpha1"
 	v1alpha1logpush "github.com/theepicsaxguy/provider-cloudflare/apis/logpush/v1alpha1"
 	v1alpha1magic "github.com/theepicsaxguy/provider-cloudflare/apis/magic/v1alpha1"
-	v1alpha1managed "github.com/theepicsaxguy/provider-cloudflare/apis/managed/v1alpha1"
 	v1alpha1notification "github.com/theepicsaxguy/provider-cloudflare/apis/notification/v1alpha1"
 	v1alpha1originca "github.com/theepicsaxguy/provider-cloudflare/apis/originca/v1alpha1"
 	v1alpha1page "github.com/theepicsaxguy/provider-cloudflare/apis/page/v1alpha1"
 	v1alpha1pages "github.com/theepicsaxguy/provider-cloudflare/apis/pages/v1alpha1"
-	v1alpha1rate "github.com/theepicsaxguy/provider-cloudflare/apis/rate/v1alpha1"
 	v1alpha1ruleset "github.com/theepicsaxguy/provider-cloudflare/apis/ruleset/v1alpha1"
 	v1alpha1spectrum "github.com/theepicsaxguy/provider-cloudflare/apis/spectrum/v1alpha1"
 	v1alpha1teams "github.com/theepicsaxguy/provider-cloudflare/apis/teams/v1alpha1"
-	v1alpha1url "github.com/theepicsaxguy/provider-cloudflare/apis/url/v1alpha1"
-	v1alpha1user "github.com/theepicsaxguy/provider-cloudflare/apis/user/v1alpha1"
 	v1alpha1apis "github.com/theepicsaxguy/provider-cloudflare/apis/v1alpha1"
 	v1beta1 "github.com/theepicsaxguy/provider-cloudflare/apis/v1beta1"
 	v1alpha1waf "github.com/theepicsaxguy/provider-cloudflare/apis/waf/v1alpha1"
@@ -74,17 +70,13 @@ func init() {
 		v1alpha1loadbalancer.SchemeBuilder.AddToScheme,
 		v1alpha1logpush.SchemeBuilder.AddToScheme,
 		v1alpha1magic.SchemeBuilder.AddToScheme,
-		v1alpha1managed.SchemeBuilder.AddToScheme,
 		v1alpha1notification.SchemeBuilder.AddToScheme,
 		v1alpha1originca.SchemeBuilder.AddToScheme,
 		v1alpha1page.SchemeBuilder.AddToScheme,
 		v1alpha1pages.SchemeBuilder.AddToScheme,
-		v1alpha1rate.SchemeBuilder.AddToScheme,
 		v1alpha1ruleset.SchemeBuilder.AddToScheme,
 		v1alpha1spectrum.SchemeBuilder.AddToScheme,
 		v1alpha1teams.SchemeBuilder.AddToScheme,
-		v1alpha1url.SchemeBuilder.AddToScheme,
-		v1alpha1user.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1alpha1waf.SchemeBuilder.AddToScheme,

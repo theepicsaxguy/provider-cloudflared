@@ -56,7 +56,6 @@ import (
 	gretunnel "github.com/theepicsaxguy/provider-cloudflare/internal/controller/magic/gretunnel"
 	ipsectunnel "github.com/theepicsaxguy/provider-cloudflare/internal/controller/magic/ipsectunnel"
 	staticroute "github.com/theepicsaxguy/provider-cloudflare/internal/controller/magic/staticroute"
-	headers "github.com/theepicsaxguy/provider-cloudflare/internal/controller/managed/headers"
 	policynotification "github.com/theepicsaxguy/provider-cloudflare/internal/controller/notification/policy"
 	policywebhooks "github.com/theepicsaxguy/provider-cloudflare/internal/controller/notification/policywebhooks"
 	certificateoriginca "github.com/theepicsaxguy/provider-cloudflare/internal/controller/originca/certificate"
@@ -64,7 +63,6 @@ import (
 	domain "github.com/theepicsaxguy/provider-cloudflare/internal/controller/pages/domain"
 	project "github.com/theepicsaxguy/provider-cloudflare/internal/controller/pages/project"
 	providerconfig "github.com/theepicsaxguy/provider-cloudflare/internal/controller/providerconfig"
-	limit "github.com/theepicsaxguy/provider-cloudflare/internal/controller/rate/limit"
 	ruleset "github.com/theepicsaxguy/provider-cloudflare/internal/controller/ruleset/ruleset"
 	applicationspectrum "github.com/theepicsaxguy/provider-cloudflare/internal/controller/spectrum/application"
 	accountteams "github.com/theepicsaxguy/provider-cloudflare/internal/controller/teams/account"
@@ -72,8 +70,6 @@ import (
 	location "github.com/theepicsaxguy/provider-cloudflare/internal/controller/teams/location"
 	proxyendpoint "github.com/theepicsaxguy/provider-cloudflare/internal/controller/teams/proxyendpoint"
 	ruleteams "github.com/theepicsaxguy/provider-cloudflare/internal/controller/teams/rule"
-	normalizationsettings "github.com/theepicsaxguy/provider-cloudflare/internal/controller/url/normalizationsettings"
-	agentblockingrule "github.com/theepicsaxguy/provider-cloudflare/internal/controller/user/agentblockingrule"
 	groupwaf "github.com/theepicsaxguy/provider-cloudflare/internal/controller/waf/group"
 	override "github.com/theepicsaxguy/provider-cloudflare/internal/controller/waf/override"
 	rulewaf "github.com/theepicsaxguy/provider-cloudflare/internal/controller/waf/rule"
@@ -96,10 +92,14 @@ import (
 	dnssec "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/dnssec"
 	healthcheck "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/healthcheck"
 	logpullretention "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/logpullretention"
+	managedheaders "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/managedheaders"
+	ratelimit "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/ratelimit"
+	settingsoverride "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/settingsoverride"
 	tieredcache "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/tieredcache"
 	totaltls "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/totaltls"
+	urlnormalizationsettings "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/urlnormalizationsettings"
+	useragentblockingrule "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/useragentblockingrule"
 	zone "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/zone"
-	zonesettingsoverride "github.com/theepicsaxguy/provider-cloudflare/internal/controller/zone/zonesettingsoverride"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -153,7 +153,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		gretunnel.Setup,
 		ipsectunnel.Setup,
 		staticroute.Setup,
-		headers.Setup,
 		policynotification.Setup,
 		policywebhooks.Setup,
 		certificateoriginca.Setup,
@@ -161,7 +160,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		domain.Setup,
 		project.Setup,
 		providerconfig.Setup,
-		limit.Setup,
 		ruleset.Setup,
 		applicationspectrum.Setup,
 		accountteams.Setup,
@@ -169,8 +167,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		location.Setup,
 		proxyendpoint.Setup,
 		ruleteams.Setup,
-		normalizationsettings.Setup,
-		agentblockingrule.Setup,
 		groupwaf.Setup,
 		override.Setup,
 		rulewaf.Setup,
@@ -193,10 +189,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		dnssec.Setup,
 		healthcheck.Setup,
 		logpullretention.Setup,
+		managedheaders.Setup,
+		ratelimit.Setup,
+		settingsoverride.Setup,
 		tieredcache.Setup,
 		totaltls.Setup,
+		urlnormalizationsettings.Setup,
+		useragentblockingrule.Setup,
 		zone.Setup,
-		zonesettingsoverride.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
