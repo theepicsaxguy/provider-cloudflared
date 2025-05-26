@@ -9,36 +9,64 @@ Cloudflare API.
 
 Install the provider by using the following command after changing the image tag
 to the [latest release](https://marketplace.upbound.io/providers/theepicsaxguy/provider-cloudflare):
-```
+
+```bash
 up ctp provider install theepicsaxguy/provider-cloudflare:v0.1.0
 ```
 
 Alternatively, you can use declarative installation:
-```
-cat <<EOF | kubectl apply -f -
+
+```yaml
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-cloudflare
 spec:
   package: theepicsaxguy/provider-cloudflare:v0.1.0
-EOF
 ```
 
-Notice that in this example Provider resource is referencing ControllerConfig with debug enabled.
+## Configuration
 
-You can see the API reference [here](https://doc.crds.dev/github.com/theepicsaxguy/provider-cloudflare).
+The provider needs to be configured with proper credentials to communicate with the Cloudflare API. Here's how to set it up:
 
-## Resource Refrence and Status
+```yaml
+apiVersion: cloudflare.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: cloudflare-creds
+      key: credentials
+```
 
-I've tried to keep the resources grouped in a logical fashion and tested as many as I have access to.
+The credentials secret should contain your Cloudflare API token:
 
-Table below shows the Terraform resources and maps it to it's k8s details, along with whether or not testing was completed for the resource.
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: cloudflare-creds
+  namespace: crossplane-system
+type: Opaque
+stringData:
+  credentials: |
+    {
+      "api_token": "your-api-token-here"
+    }
+```
 
-If you're able to confirm one works please open a PR or issue to update the table.
+## Resource Reference
+
+This provider package is generated using Upjet. The provider supports many Cloudflare resources, each configured to work properly with Crossplane's managed resource pattern and async operations.
+
+Here's a sample of the supported resources and their current status:
 
 | TF Resource | API Group | API Version | Kind | Tested |
-| ---         | ---       | ---  | ---         | ---    |
+| --- | --- | --- | --- | --- |
 | cloudflare_access_application | Application | access.cloudflare.upbound.io | v1alpha1 | ❌ |
 | cloudflare_access_bookmark | Bookmark | access.cloudflare.upbound.io | v1alpha1 | ❌ |
 | cloudflare_access_ca_certificate | CACertificate | access.cloudflare.upbound.io | v1alpha1 | ❌ |
@@ -50,7 +78,7 @@ If you're able to confirm one works please open a PR or issue to update the tabl
 | cloudflare_access_policy | Policy | access.cloudflare.upbound.io | v1alpha1 | ❌ |
 | cloudflare_access_rule | Rule | access.cloudflare.upbound.io | v1alpha1 | ❌ |
 | cloudflare_access_service_token | ServiceToken | access.cloudflare.upbound.io | v1alpha1 | ❌ |
-| cloudflare_account  | Account | account.cloudflare.upbound.io | v1alpha1 | ✅ |
+| cloudflare_account | Account | account.cloudflare.upbound.io | v1alpha1 | ✅ |
 | cloudflare_account_member | Member | account.cloudflare.upbound.io | v1alpha1 | ✅ |
 | cloudflare_api_shield | APIShield | apishield.cloudflare.upbound.io | v1alpha1 | ✅ |
 | cloudflare_api_token | Token | account.cloudflare.upbound.io | v1alpha1 | ✅ |
@@ -134,11 +162,13 @@ If you're able to confirm one works please open a PR or issue to update the tabl
 ## Developing
 
 Initialize build dependencies:
+
 ```console
 make submodules
 ```
 
 Run code-generation pipeline:
+
 ```console
 make generate
 ```
@@ -165,3 +195,19 @@ make build
 
 For filing bugs, suggesting improvements, or requesting new features, please
 open an [issue](https://github.com/theepicsaxguy/provider-cloudflare/issues).
+
+## Contributing
+
+If you find a bug or want to add support for more resources, please:
+
+1. First check the existing issues and PRs
+2. Create a new issue describing what you'd like to add/fix
+3. Fork the repository and make your changes
+4. Submit a PR with your changes
+
+When adding new resources, make sure to:
+
+1. Configure the resource properly in the appropriate config/<resource>/config.go file
+2. Add proper references and managed resource configuration
+3. Test the resource with actual Cloudflare credentials
+4. Update the resource status in this README

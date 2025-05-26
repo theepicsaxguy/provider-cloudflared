@@ -14,22 +14,24 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.NameAsIdentifier
 
 		// Configure which fields are for spec vs status
-		r.TerraformResource.Schema["id"].Required = false
-		r.TerraformResource.Schema["id"].Computed = true
-
-		// Ensure proper status tracking
-		r.UseAsync = true
-
-		// Configure name field
-		if s, ok := r.TerraformResource.Schema["name"]; ok {
-			s.Required = true
-		}
-
-		// Set up base types
 		r.References = config.References{
 			"name": {
 				Type: "string",
 			},
+		}
+
+		// Enable async operations
+		r.UseAsync = true
+
+		// Configure fields
+		if s, ok := r.TerraformResource.Schema["id"]; ok {
+			s.Required = false
+			s.Computed = true
+		}
+
+		// Configure name field
+		if s, ok := r.TerraformResource.Schema["name"]; ok {
+			s.Required = true
 		}
 	})
 
@@ -41,30 +43,27 @@ func Configure(p *config.Provider) {
 		r.ExternalName = config.IdentifierFromProvider
 
 		// Reference to parent Account
-		r.References["account_id"] = config.Reference{
-			Type: "Account",
+		r.References = config.References{
+			"account_id": {
+				Type: "Account",
+			},
 		}
 
 		// Ensure proper status tracking
 		r.UseAsync = true
 
 		// Set which fields belong in status vs spec
-		r.TerraformResource.Schema["id"].Required = false
-		r.TerraformResource.Schema["id"].Computed = true
+		if s, ok := r.TerraformResource.Schema["id"]; ok {
+			s.Required = false
+			s.Computed = true
+		}
 
 		// Configure email field
 		if s, ok := r.TerraformResource.Schema["email"]; ok {
 			s.Required = true
 		}
 
-		// Set up base types
-		r.References = config.References{
-			"email": {
-				Type: "string",
-			},
-		}
-
-		// Ensure proper managed resource setup
+		// Configure connection details
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			conn := map[string][]byte{}
 			if id, ok := attr["id"].(string); ok {
@@ -84,40 +83,23 @@ func Configure(p *config.Provider) {
 		// Configure external name
 		r.ExternalName = config.NameAsIdentifier
 
+		// Ensure proper status tracking
+		r.UseAsync = true
+
+		// Configure fields
+		if s, ok := r.TerraformResource.Schema["id"]; ok {
+			s.Required = false
+			s.Computed = true
+		}
+
 		// Mark sensitive fields
 		if s, ok := r.TerraformResource.Schema["value"]; ok {
 			s.Sensitive = true
 		}
 
-		// Set which fields belong in status vs spec
-		r.TerraformResource.Schema["id"].Required = false
-		r.TerraformResource.Schema["id"].Computed = true
-
 		// Configure name field
 		if s, ok := r.TerraformResource.Schema["name"]; ok {
 			s.Required = true
-		}
-
-		// Ensure proper status tracking
-		r.UseAsync = true
-
-		// Set up base types
-		r.References = config.References{
-			"name": {
-				Type: "string",
-			},
-		}
-
-		// Configure sensitive values
-		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
-			conn := map[string][]byte{}
-			if val, ok := attr["value"].(string); ok {
-				conn["token"] = []byte(val)
-			}
-			if id, ok := attr["id"].(string); ok {
-				conn["token_id"] = []byte(id)
-			}
-			return conn, nil
 		}
 	})
 }
